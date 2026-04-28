@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TKA - Student Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --navy: #001f3f;
+            --white: #ffffff;
+            --accent: #007bff;
+            --bg-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        body { 
+            margin: 0; 
+            background: var(--bg-image); 
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* --- Animations --- */
+        @keyframes flyIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .fly-out { animation: flyIn 0.5s ease-out; }
+
+        /* --- Login Overlay --- */
+        #login-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--navy); display: flex; justify-content: center;
+            align-items: center; z-index: 1000; color: white;
+        }
+
+        .login-box {
+            background: white; padding: 2rem; border-radius: 10px;
+            color: var(--navy); width: 350px; text-align: center;
+        }
+
+        /* --- Header & Layout --- */
+        header {
+            background: var(--navy); color: white; padding: 1rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .container { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+
+        /* --- Form Styling --- */
+        .card {
+            background: white; padding: 2rem; border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .grid-form {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+        }
+
+        input, select {
+            width: 100%; padding: 10px; border: 1px solid #ddd;
+            border-radius: 5px; margin-top: 5px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .action-box {
+            background: #e7f1ff; border: 2px solid var(--accent);
+            padding: 1.5rem; border-radius: 8px; margin-top: 2rem;
+            display: flex; gap: 10px; justify-content: center;
+        }
+
+        .btn {
+            padding: 10px 25px; border: none; border-radius: 5px;
+            cursor: pointer; font-weight: bold; transition: 0.3s;
+        }
+
+        .btn-save { background: #28a745; color: white; }
+        .btn-discard { background: #dc3545; color: white; }
+        .btn-print { background: var(--accent); color: white; }
+
+        /* --- Table/List --- */
+        .student-list { margin-top: 2rem; background: white; border-radius: 8px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: var(--navy); color: white; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #eee; }
+
+        /* --- Three Dots Menu --- */
+        .dropdown { position: relative; display: inline-block; }
+        .dropbtn { background: none; border: none; cursor: pointer; font-size: 20px; }
+        .dropdown-content {
+            display: none; position: absolute; right: 0; background: white;
+            min-width: 120px; box-shadow: 0 8px 16px rgba(0,0,0,0.2); z-index: 1;
+            border-radius: 5px;
+        }
+        .dropdown-content a { color: black; padding: 12px 16px; text-decoration: none; display: block; }
+        .dropdown-content a:hover { background: #f1f1f1; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* --- Settings/Footer --- */
+        .settings-panel {
+            position: fixed; right: -300px; top: 0; width: 300px; height: 100%;
+            background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: 0.4s; padding: 2rem; z-index: 999;
+        }
+
+        .footer-credit {
+            text-align: center; margin-top: 3rem; color: var(--navy);
+        }
+        .engineer-font {
+            font-family: 'Brush Script MT', cursive; font-size: 1.4rem; font-weight: bold;
+        }
+
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-screen">
